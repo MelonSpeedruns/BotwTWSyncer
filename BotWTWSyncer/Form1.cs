@@ -49,6 +49,10 @@ namespace BotWTWSyncer
         public Form1()
         {
             InitializeComponent();
+            numericUpDown1.Value = Properties.Settings.Default.Latitude;
+            numericUpDown2.Value = Properties.Settings.Default.Longitude;
+            checkBox2.Checked = Properties.Settings.Default.TimeSync;
+            checkBox1.Checked = Properties.Settings.Default.WeatherSync;
         }
 
         public static byte[] HexStringToByteArray(string hex)
@@ -139,9 +143,6 @@ namespace BotWTWSyncer
             timer1.Enabled = true;
 
             button6.Enabled = false;
-
-            checkBox1.Enabled = true;
-            checkBox2.Enabled = true;
 
             numericUpDown1.Enabled = false;
             numericUpDown2.Enabled = false;
@@ -249,6 +250,9 @@ namespace BotWTWSyncer
             else
             {
                 button6.Enabled = true;
+                Properties.Settings.Default.Latitude = numericUpDown1.Value;
+                Properties.Settings.Default.Longitude = numericUpDown2.Value;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -265,6 +269,18 @@ namespace BotWTWSyncer
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.latlong.net/");
+        }
+
+        private void checkBox2_CheckStateChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.TimeSync = checkBox2.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.WeatherSync = checkBox1.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
