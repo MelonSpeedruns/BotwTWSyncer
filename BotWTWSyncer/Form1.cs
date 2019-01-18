@@ -243,7 +243,7 @@ namespace BotWTWSyncer
 
         public void VerifyNumericBoxes()
         {
-            if (numericUpDown1.Value == 0 || numericUpDown2.Value == 0)
+            if ((numericUpDown1.Value == 0 || numericUpDown2.Value == 0) && checkBox1.Checked)
             {
                 button6.Enabled = false;
             }
@@ -281,6 +281,7 @@ namespace BotWTWSyncer
         {
             Properties.Settings.Default.WeatherSync = checkBox1.Checked;
             Properties.Settings.Default.Save();
+            VerifyNumericBoxes();
         }
     }
 }
